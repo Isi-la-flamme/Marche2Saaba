@@ -1,0 +1,13 @@
+<h1>Liste des annonces</h1>
+<form method="get">
+  <input name="q" placeholder="Rechercher">
+  <button>OK</button>
+</form>
+
+{% for a in annonces %}
+<div>
+  <a href="/annonce/{{ a.id }}/">{{ a.titre }}</a> - {{ a.prix }} €
+</div>
+{% endfor %}
+
+<a href="/ajouter/">+ Ajouter une annonce</a>
