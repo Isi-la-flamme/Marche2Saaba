@@ -3,21 +3,29 @@
 {% block title %}Annonces locales{% endblock %}
 
 {% block content %}
-  <h1>Liste des annonces</h1>
-  <form method="get">
-    <div class="form-row">
-      <input class="form-control" name="q" placeholder="Rechercher par titre" value="{{ query }}">
+  <div class="hero">
+    <h1>Marché d'annonces local</h1>
+    <p>Trouvez les meilleures offres près de chez vous : immobilier, véhicules, téléphones et plus.</p>
+    <form method="get">
+      <input class="form-control" name="q" placeholder="Que cherchez-vous ?" value="{{ query }}">
       <input class="form-control" name="ville" placeholder="Ville" value="{{ ville }}">
       <button class="button" type="submit">Rechercher</button>
-    </div>
-  </form>
+    </form>
+  </div>
 
+  <div class="category-list">
+    {% for value, label in categories %}
+      <a class="category-chip" href="{% url 'category_list' value %}">{{ label }}</a>
+    {% endfor %}
+  </div>
+
+  <h2>Dernières annonces</h2>
   {% if annonces %}
     {% for a in annonces %}
       <div class="card">
         <h2><a href="{{ a.get_absolute_url }}">{{ a.titre }}</a></h2>
         <p>{{ a.ville }} {{ a.code_postal }} | {{ a.categorie }}</p>
-        <p>{{ a.prix }} €</p>
+        <p><strong>{{ a.prix }} €</strong></p>
       </div>
     {% endfor %}
   {% else %}

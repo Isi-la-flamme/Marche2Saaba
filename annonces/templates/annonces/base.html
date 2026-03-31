@@ -11,7 +11,16 @@
     .container { max-width: 900px; margin: 1rem auto; padding: 1rem; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
     .button { display: inline-block; margin: .5rem 0; padding: .6rem 1rem; background: #3498db; color: white; text-decoration: none; border-radius: 4px; }
     .button.secondary { background: #7f8c8d; }
-    .card { border: 1px solid #ddd; padding: 1rem; margin-bottom: 1rem; border-radius: 4px; }
+    .card { border: 1px solid #ddd; padding: 1rem; margin-bottom: 1rem; border-radius: 4px; background: #fff; }
+    .hero { padding: 2rem; background: linear-gradient(135deg, #2e86de 0%, #6c5ce7 100%); color: white; margin-bottom: 1.5rem; border-radius: 8px; }
+    .hero h1 { margin: 0 0 0.5rem; font-size: 2.2rem; }
+    .hero p { margin: 0 0 1.5rem; max-width: 600px; line-height: 1.6; }
+    .hero form { display: flex; flex-wrap: wrap; gap: .75rem; }
+    .hero .form-control { width: 100%; }
+    .hero .button { min-width: 160px; }
+    .category-list { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+    .category-chip { display: inline-flex; align-items: center; padding: .6rem 1rem; background: #ecf0f1; border-radius: 999px; color: #2c3e50; text-decoration: none; font-size: .95rem; }
+    .category-chip:hover { background: #dfe6e9; }
     .form-control { width: 100%; padding: .6rem; margin: .25rem 0 1rem; border: 1px solid #ccc; border-radius: 4px; }
     .form-row { display: flex; gap: 1rem; flex-wrap: wrap; }
     .form-row > * { flex: 1; min-width: 160px; }
@@ -24,8 +33,11 @@
       {% if request.user.is_authenticated %}
         <a href="/ajouter/">Ajouter une annonce</a>
         <a href="/mes-annonces/">Mes annonces</a>
-        <a href="{% url 'logout' %}">Déconnexion</a>
-        <span>Bonjour {{ request.user.username }}</span>
+        <form method="post" action="{% url 'logout' %}" style="display:inline; margin:0;">
+          {% csrf_token %}
+          <button class="button secondary" type="submit">Déconnexion</button>
+        </form>
+        <span style="margin-left: .5rem;">Bonjour {{ request.user.username }}</span>
       {% else %}
         <a href="{% url 'login' %}">Connexion</a>
         <a href="{% url 'signup' %}">Inscription</a>
