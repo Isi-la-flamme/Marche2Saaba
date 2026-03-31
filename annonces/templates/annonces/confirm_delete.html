@@ -1,0 +1,18 @@
+{% extends 'annonces/base.html' %}
+
+{% block title %}Supprimer l'annonce{% endblock %}
+
+{% block content %}
+  <h1>Supprimer l'annonce</h1>
+  <div class="card">
+    <h2>{{ annonce.titre }}</h2>
+    <p>{{ annonce.ville }} - {{ annonce.code_postal }}</p>
+    <p>{{ annonce.prix }} €</p>
+    <p>Voulez-vous vraiment supprimer cette annonce ?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button class="button" type="submit">Oui, supprimer</button>
+      <a class="button secondary" href="/annonce/{{ annonce.id }}/">Annuler</a>
+    </form>
+  </div>
+{% endblock %}

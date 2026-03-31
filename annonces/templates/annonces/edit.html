@@ -1,0 +1,13 @@
+{% extends 'annonces/base.html' %}
+
+{% block title %}Éditer l'annonce{% endblock %}
+
+{% block content %}
+  <h1>Éditer l'annonce</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="button" type="submit">Enregistrer</button>
+    <a class="button secondary" href="/annonce/{{ annonce.id }}/">Annuler</a>
+  </form>
+{% endblock %}

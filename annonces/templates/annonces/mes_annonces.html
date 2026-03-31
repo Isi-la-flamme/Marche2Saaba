@@ -1,0 +1,22 @@
+{% extends 'annonces/base.html' %}
+
+{% block title %}Mes annonces{% endblock %}
+
+{% block content %}
+  <h1>Mes annonces</h1>
+  <p>Retrouvez toutes vos annonces locales et gérez-les facilement.</p>
+
+  {% if annonces %}
+    {% for annonce in annonces %}
+      <div class="card">
+        <h2><a href="{{ annonce.get_absolute_url|default:'#' }}">{{ annonce.titre }}</a></h2>
+        <p>{{ annonce.ville }} - {{ annonce.code_postal }} | {{ annonce.categorie }}</p>
+        <p>{{ annonce.prix }} €</p>
+        <a class="button" href="/annonce/{{ annonce.id }}/editer/">Modifier</a>
+        <a class="button secondary" href="/annonce/{{ annonce.id }}/supprimer/">Supprimer</a>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Aucune annonce publiée pour l'instant.</p>
+  {% endif %}
+{% endblock %}

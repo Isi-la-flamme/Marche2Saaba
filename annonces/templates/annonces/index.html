@@ -1,13 +1,26 @@
-<h1>Liste des annonces</h1>
-<form method="get">
-  <input name="q" placeholder="Rechercher">
-  <button>OK</button>
-</form>
+{% extends 'annonces/base.html' %}
 
-{% for a in annonces %}
-<div>
-  <a href="/annonce/{{ a.id }}/">{{ a.titre }}</a> - {{ a.prix }} €
-</div>
-{% endfor %}
+{% block title %}Annonces locales{% endblock %}
 
-<a href="/ajouter/">+ Ajouter une annonce</a>
+{% block content %}
+  <h1>Liste des annonces</h1>
+  <form method="get">
+    <div class="form-row">
+      <input class="form-control" name="q" placeholder="Rechercher par titre" value="{{ query }}">
+      <input class="form-control" name="ville" placeholder="Ville" value="{{ ville }}">
+      <button class="button" type="submit">Rechercher</button>
+    </div>
+  </form>
+
+  {% if annonces %}
+    {% for a in annonces %}
+      <div class="card">
+        <h2><a href="{{ a.get_absolute_url }}">{{ a.titre }}</a></h2>
+        <p>{{ a.ville }} {{ a.code_postal }} | {{ a.categorie }}</p>
+        <p>{{ a.prix }} €</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Aucune annonce trouvée.</p>
+  {% endif %}
+{% endblock %}

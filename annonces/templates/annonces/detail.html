@@ -1,5 +1,19 @@
-<h1>{{ annonce.titre }}</h1>
-<p>{{ annonce.description }}</p>
-<p>{{ annonce.prix }} €</p>
-<img src="{{ annonce.image.url }}" width="300">
-<a href="https://wa.me/{{ annonce.contact }}">Contact WhatsApp</a>
+{% extends 'annonces/base.html' %}
+
+{% block title %}{{ annonce.titre }}{% endblock %}
+
+{% block content %}
+  <h1>{{ annonce.titre }}</h1>
+  <p><strong>Catégorie :</strong> {{ annonce.categorie }}</p>
+  <p><strong>Ville :</strong> {{ annonce.ville }} {{ annonce.code_postal }}</p>
+  <p><strong>Prix :</strong> {{ annonce.prix }} €</p>
+  <div class="card">
+    <p>{{ annonce.description }}</p>
+    {% if annonce.image %}
+      <img src="{{ annonce.image.url }}" width="100%" alt="{{ annonce.titre }}">
+    {% endif %}
+  </div>
+  <p><strong>Contact :</strong> <a href="https://wa.me/{{ annonce.contact }}">{{ annonce.contact }}</a></p>
+  <a class="button" href="/annonce/{{ annonce.id }}/editer/">Modifier</a>
+  <a class="button secondary" href="/annonce/{{ annonce.id }}/supprimer/">Supprimer</a>
+{% endblock %}

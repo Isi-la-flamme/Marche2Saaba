@@ -1,10 +1,12 @@
-<h1>Ajouter une annonce</h1>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <input name="titre" placeholder="Titre"><br>
-  <input name="prix" placeholder="Prix"><br>
-  <input name="description" placeholder="Description"><br>
-  <input name="contact" placeholder="WhatsApp"><br>
-  <input type="file" name="image"><br>
-  <button>Ajouter</button>
-</form>
+{% extends 'annonces/base.html' %}
+
+{% block title %}Ajouter une annonce{% endblock %}
+
+{% block content %}
+  <h1>Ajouter une annonce</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="button" type="submit">Ajouter</button>
+  </form>
+{% endblock %}
